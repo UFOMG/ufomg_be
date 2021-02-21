@@ -18,9 +18,9 @@ class Report(db.Model):
     # long
     long = Column(Float(13), unique=False, nullable=True)
     # description
-    description = Column(String(250), unique=False, nullable=True)
+    description = Column(String(250), unique=False, nullable=False)
     # event_type
-    event_type = Column(String(100), unique=False, nullable=True)
+    event_type = Column(String(100), unique=False, nullable=False)
     # image
     image = Column(String(100), unique=False, nullable=True)
 
@@ -50,6 +50,7 @@ class Report(db.Model):
         self.long = long
         self.description = description
         self.event_type = event_type
+        self.image = image
         if report_id is not None:
             self.id = report_id
 
