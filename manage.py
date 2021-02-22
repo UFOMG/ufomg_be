@@ -3,7 +3,7 @@ from flask_migrate import Migrate, MigrateCommand
 
 from api import create_app, db
 from api.database.models import Report
-# from tests import db_drop_everything
+from tests import db_drop_everything
 
 app = create_app()
 migrate = Migrate(app, db)
