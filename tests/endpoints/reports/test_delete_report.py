@@ -15,7 +15,7 @@ class DeleteReportTest(unittest.TestCase):
         db.create_all()
         self.client = self.app.test_client()
 
-        self.report_1 = Report(name='Number1Believer, email='e1')
+        self.report_1 = Report(name='Phil', lat=3.123123, long=3.345345, description="some crazy stuff happened", event_type="abduction", image="image.com")
         self.report_1.insert()
 
     def tearDown(self):
@@ -23,22 +23,22 @@ class DeleteReportTest(unittest.TestCase):
         db_drop_everything(db)
         self.app_context.pop()
 
-    def test_happypath_delete_a_user(self):
+    def test_happypath_delete_a_report(self):
         response = self.client.delete(
-            f'/api/v1/users/{self.user_1.id}'
+            f'/api/v1/reports/{self.report_1.id}'
         )
         self.assertEqual(204, response.status_code)
         self.assertEqual('', response.data.decode('utf-8'))
 
         # ensure it's really gone by getting a 404 if we try to fetch it again
         response = self.client.get(
-            f'/api/v1/users/{self.user_1.id}'
+            f'/api/v1/reports/{self.report_1.id}'
         )
         self.assertEqual(404, response.status_code)
 
-    def test_sadpath_delete_bad_id_user(self):
+    def test_sadpath_delete_bad_id_report(self):
         response = self.client.delete(
-            f'/api/v1/users/9999999'
+            f'/api/v1/reports/9999999'
         )
         self.assertEqual(404, response.status_code)
 
