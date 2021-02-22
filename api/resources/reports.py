@@ -6,8 +6,10 @@ from flask_restful import Resource, abort
 from sqlalchemy.orm.exc import NoResultFound
 from api import db
 from api.database.models import Report
+
 def _validate_field(data, field, proceed, errors, missing_okay=False):
     if field in data:
+        data[field] = data[field].strip()
         if len(str(data[field])) == 0:
             proceed = False
             errors.append(f"required '{field}' parameter is blank")
@@ -29,13 +31,14 @@ def _report_payload(report):
             'get': f'/api/v1/reports/{report.id}',
             'delete': f'/api/v1/reports/{report.id}',
             'index': '/api/v1/reports',
+            'patch': f'/api/v1/reports/{report.id}'
         }
     }
 class ReportsResource(Resource):
     def _create_report(self, data):
         proceed = True
         errors = []
-    
+
         proceed, report_event_type, errors = _validate_field(
             data, 'event_type', proceed, errors)
         proceed, report_description, errors = _validate_field(
