@@ -28,6 +28,8 @@ def _report_payload(report):
         'event_type': report.event_type,
         'description': report.description,
         'image': report.image,
+        'city': report.city,
+        'state': report.state,
         'links': {
             'get': f'/api/v1/reports/{report.id}',
             'delete': f'/api/v1/reports/{report.id}',
@@ -48,6 +50,10 @@ class ReportsResource(Resource):
             data, 'lat', proceed, errors)
         proceed, report_description, errors = _validate_field(
             data, 'long', proceed, errors)
+        proceed, report_description, errors = _validate_field(
+            data, 'city', proceed, errors)
+        proceed, report_description, errors = _validate_field(
+            data, 'state', proceed, errors)
 
         if proceed:
             report = Report(
@@ -56,7 +62,9 @@ class ReportsResource(Resource):
                 long=data['long'],
                 event_type=data['event_type'],
                 description=data['description'],
-                image=data['image']
+                image=data['image'],
+                city=data['city'],
+                state=data['state']
             )
             db.session.add(report)
             db.session.commit()
