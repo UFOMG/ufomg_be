@@ -9,7 +9,8 @@ from api.database.models import Report
 
 def _validate_field(data, field, proceed, errors, missing_okay=False):
     if field in data:
-        data[field] = data[field].strip()
+        if type(data[field]) is str:
+            data[field] = data[field].strip()
         if len(str(data[field])) == 0:
             proceed = False
             errors.append(f"required '{field}' parameter is blank")
@@ -27,6 +28,8 @@ def _report_payload(report):
         'event_type': report.event_type,
         'description': report.description,
         'image': report.image,
+        'city': report.city,
+        'state': report.state,
         'links': {
             'get': f'/api/v1/reports/{report.id}',
             'delete': f'/api/v1/reports/{report.id}',
@@ -43,6 +46,14 @@ class ReportsResource(Resource):
             data, 'event_type', proceed, errors)
         proceed, report_description, errors = _validate_field(
             data, 'description', proceed, errors)
+        proceed, report_description, errors = _validate_field(
+            data, 'lat', proceed, errors)
+        proceed, report_description, errors = _validate_field(
+            data, 'long', proceed, errors)
+        proceed, report_description, errors = _validate_field(
+            data, 'city', proceed, errors)
+        proceed, report_description, errors = _validate_field(
+            data, 'state', proceed, errors)
 
         if proceed:
             report = Report(
@@ -51,7 +62,9 @@ class ReportsResource(Resource):
                 long=data['long'],
                 event_type=data['event_type'],
                 description=data['description'],
-                image=data['image']
+                image=data['image'],
+                city=data['city'],
+                state=data['state']
             )
             db.session.add(report)
             db.session.commit()
@@ -80,13 +93,6 @@ class ReportsResource(Resource):
             'results': results
         }, 200
 class ReportResource(Resource):
-    """
-    this Resource file is for our /reports endpoints which do require
-    a resource ID in the URI path
-    GET /reports/6
-    DELETE /reports/3
-    PATCH /reports/18
-    """
     def get(self, *args, **kwargs):
         report_id = int(bleach.clean(kwargs['report_id'].strip()))
         report = None

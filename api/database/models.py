@@ -12,44 +12,35 @@ class Report(db.Model):
     # Auto-incrementing, unique primary key
     id = Column(Integer, primary_key=True)
     # name
-    name = Column(String(80), unique=True, nullable=True)
+    name = Column(String(80), nullable=True)
     # lat
-    lat = Column(Float(13), unique=False, nullable=True)
+    lat = Column(Float(13), unique=False, nullable=False)
     # long
-    long = Column(Float(13), unique=False, nullable=True)
+    long = Column(Float(13), unique=False, nullable=False)
     # description
     description = Column(String(250), unique=False, nullable=False)
     # event_type
     event_type = Column(String(100), unique=False, nullable=False)
     # image
-    image = Column(String(100), unique=False, nullable=True)
+    image = Column(String(100), nullable=True)
+    # city
+    city = Column(String(100), unique=False, nullable=False)
+    # state
+    state = Column(String(100), unique=False, nullable=False)
 
-    def __init__(self, name, lat, long, description, event_type, image, report_id=None):
+    def __init__(self, name, lat, long, description, event_type, city, state, image, report_id=None):
         if name is not None:
             name = bleach.clean(name).strip()
             if name == '':
                 name = 'Anonymous'
-
-        if lat == '':
-          lat = None
-
-        if long == '':
-          long = None
-
-        if description == '':
-          description = None
-
-        if event_type == '':
-          event_type = None
-
-        if image == '':
-          image = None
 
         self.name = name
         self.lat = lat
         self.long = long
         self.description = description
         self.event_type = event_type
+        self.city = city
+        self.state = state
         self.image = image
         if report_id is not None:
             self.id = report_id
