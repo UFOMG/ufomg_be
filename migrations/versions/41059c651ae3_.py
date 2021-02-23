@@ -20,7 +20,7 @@ def upgrade():
     sa.Column('event_type', sa.String(length=100), nullable=False),
     sa.Column('image', sa.String(length=100), nullable=True),
     sa.Column('city', sa.String(length=100), nullable=False),
-    sa.Column('state', sa.String(length=100), nullable=False)
+    sa.Column('state', sa.String(length=100), nullable=False),
     sa.PrimaryKeyConstraint('id')
     )
     # ### end Alembic commands ###
