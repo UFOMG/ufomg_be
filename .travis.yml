@@ -1,0 +1,27 @@
+language: python
+python:
+  - '3.9'
+  services:
+    - postgresql
+    addons:
+      postgresql: '9.6'
+      install:
+        - pip install -r requirements.txt
+        before_script:
+          - psql --version
+          - psql -c 'create database ufomg_test;' -U postgres
+          - python manage.py db upgrade
+          script:
+            - pytest
+deploy:
+  provider: heroku
+  api_key:
+    secure: mIwF7SBj6cff1Y4XMatkMm+hammrwe92UjT/GRmWkg2GLq1NT+iEGusG5/qdmlO0r1BRr5HoKbVri1fptyHMwxrgobb2wlf4gvSeK3NW/3/U1O2qC4HzUUQSwwjWzzm4OtCyVPO3f0trDBvxJGbhuqeEnWaHEI2n3CaXtsoxnjhGrj8/TH6JUFuv+2WWi5M21JsJwZwiwKkI6iqFJKZ4/tkKl5NHESX1BsoXvnpzrHQbmLvg8w7l8gkDkRuFK6pcaK9eNVOy4nfNYLLSHsyT0pNm8PZIUaZfe5DCbEmK/N16ebX0jUMpo3uF6TnoZDuR4UBHS85BBuJF+I5DUqJC3P9qpZ4vnSWMZWzWi3S5hWvtjuKZwxOz9o6HP/eRnHxY3s8p6xdzz9PQ+r5dhzWAd8XoGqD+Zrnb4QjCkOOj4i3e6A/1iaEOKOYimrC4aL9y2i9SYcVE53k6ZVDRqfZMuPAMIRhdq314mKmcZFnYvkM54zWIbiQ1RiPbSm3w7NI89w9gYop9H/n9hB7Zb9EEoxMjO8t0JzfjZAORqXANBstKXR3VVJi/1tqz0sZJg9Eybymlp9CBSGw4i+al2eHeQBHcrVDeOEhncaBry/N6t9HxMZHX6RIi6nEUtoBHuH3Mi2+7IH/9mQDHkemc0Mm6zod/iPMSspFgE94wQN3tG94=
+  app: ancient-mesa-60922
+  on:
+    repo: UFOMG/ufomg_be
+    branch: main
+  skip_cleanup: 'true'
+  run:
+    - pip install -r requirements.txt
+    - python manage.py db upgrade
