@@ -25,7 +25,7 @@ class Report(db.Model):
     # image
     image = Column(String(100), unique=False, nullable=True)
     # one to many relationship with comments here
-    comments = relationship('Comment', back_populates='report', cascade='all, delete-orphan')
+    comments = relationship('Comment', backref='report', cascade='all, delete-orphan')
 
     def __init__(self, name, lat, long, description, event_type, image, report_id=None):
         if name is not None:
@@ -76,8 +76,7 @@ class Comment(db.Model):
 
     id = Column(Integer, primary_key=True)
     text = Column(String, primary_key=True, nullable=False)
-    report_id = Column(Integer, ForeignKey('report.id'))
-    report = relationship('Report', back_populates='comments')
+    report_id = Column(Integer, ForeignKey('reports.id'))
 
     def __init__(self, text, report_id, comment_id=None):
 
