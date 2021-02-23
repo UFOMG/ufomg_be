@@ -14,9 +14,9 @@ class Report(db.Model):
     # name
     name = Column(String(80), unique=True, nullable=True)
     # lat
-    lat = Column(Float(13), unique=False, nullable=True)
+    lat = Column(Float(13), unique=False, nullable=False)
     # long
-    long = Column(Float(13), unique=False, nullable=True)
+    long = Column(Float(13), unique=False, nullable=False)
     # description
     description = Column(String(250), unique=False, nullable=False)
     # event_type
@@ -29,18 +29,6 @@ class Report(db.Model):
             name = bleach.clean(name).strip()
             if name == '':
                 name = 'Anonymous'
-
-        if lat == '':
-          lat = None
-
-        if long == '':
-          long = None
-
-        if description == '':
-          description = None
-
-        if event_type == '':
-          event_type = None
 
         if image == '':
           image = None
