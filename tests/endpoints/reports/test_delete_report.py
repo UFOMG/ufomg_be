@@ -15,7 +15,16 @@ class DeleteReportTest(unittest.TestCase):
         db.create_all()
         self.client = self.app.test_client()
 
-        self.report_1 = Report(name='Phil', lat=3.123123, long=3.345345, description="some crazy stuff happened", event_type="abduction", image="image.com")
+        self.report_1 = Report(
+            name='Phil',
+            lat=3.123123,
+            long=3.345345,
+            description="some crazy stuff happened",
+            event_type="abduction",
+            image="image.com",
+            city="Greeley",
+            state="CO"
+            )
         self.report_1.insert()
 
     def tearDown(self):
