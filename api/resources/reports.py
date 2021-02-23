@@ -10,7 +10,7 @@ from api.database.models import Report
 def _render_comments(comment_obj):
     comment_list = []
     for comment in comment_obj:
-        box.append(comment.text)
+        comment_list.append(comment.text)
     return comment_list
 
 def _validate_field(data, field, proceed, errors, missing_okay=False):
