@@ -32,101 +32,9 @@ class CreateReportTest(unittest.TestCase):
         db_drop_everything(db)
         self.app_context.pop()
 
-    # def test_happypath_create_report(self):
-    #     payload = deepcopy(self.payload)
-    #
-    #     response = self.client.post(
-    #         '/api/v1/reports', json=payload,
-    #         content_type='application/json'
-    #     )
-    #     self.assertEqual(201, response.status_code)
-    #
-    #     data = json.loads(response.data.decode('utf-8'))
-    #
-    #     assert_payload_field_type_value(self, data, 'success', bool, True)
-    #
-    #     assert_payload_field_type(self, data, 'id', int)
-    #     report_id = data['id']
-    #     assert_payload_field_type_value(
-    #         self, data, 'name', str, payload['name'].strip()
-    #     )
-    #     assert_payload_field_type_value(
-    #         self, data, 'lat', float, payload['lat']
-    #     )
-    #     assert_payload_field_type_value(
-    #         self, data, 'long', float, payload['long']
-    #     )
-    #     assert_payload_field_type_value(
-    #         self, data, 'description', str, payload['description'].strip()
-    #     )
-    #     assert_payload_field_type_value(
-    #         self, data, 'event_type', str, payload['event_type'].strip()
-    #     )
-    #     assert_payload_field_type_value(
-    #         self, data, 'image', str, payload['image'].strip()
-    #     )
-    #     assert_payload_field_type_value(
-    #         self, data, 'city', str, payload['city'].strip()
-    #     )
-    #     assert_payload_field_type_value(
-    #         self, data, 'state', str, payload['state'].strip()
-    #     )
-    #
-    #     assert_payload_field_type(self, data, 'links', dict)
-    #     links = data['links']
-    #     assert_payload_field_type_value(
-    #         self, links, 'get', str, f'/api/v1/reports/{report_id}'
-    #     )
-    #     assert_payload_field_type_value(
-    #         self, links, 'patch', str, f'/api/v1/reports/{report_id}'
-    #     )
-    #     assert_payload_field_type_value(
-    #         self, links, 'delete', str, f'/api/v1/reports/{report_id}'
-    #     )
-    #     assert_payload_field_type_value(
-    #         self, links, 'index', str, '/api/v1/reports'
-    #     )
-    #
-    # def test_happypath_blank_name(self):
-    #     payload = deepcopy(self.payload)
-    #     payload['name'] = ''
-    #     response = self.client.post(
-    #         '/api/v1/reports', json=payload,
-    #         content_type='application/json'
-    #     )
-    #     self.assertEqual(201, response.status_code)
-    #     data = json.loads(response.data.decode('utf-8'))
-    #     assert_payload_field_type_value(self, data, 'success', bool, True)
-    #     assert_payload_field_type_value(self, data, 'name', str, 'Anonymous')
-    #
-    # # def test_happypath_missing_name(self):
-    # #     payload = deepcopy(self.payload)
-    # #     del payload['name']
-    # #     response = self.client.post(
-    # #         '/api/v1/reports', json=payload,
-    # #         content_type='application/json'
-    # #     )
-    # #
-    # #     self.assertEqual(201, response.status_code)
-    # #
-    # #     data = json.loads(response.data.decode('utf-8'))
-    # #     assert_payload_field_type_value(self, data, 'success', bool, False)
-    #
-    # def test_happypath_blank_image(self):
-    #     payload = deepcopy(self.payload)
-    #     payload['image'] = ''
-    #     response = self.client.post(
-    #         '/api/v1/reports', json=payload,
-    #         content_type='application/json'
-    #     )
-    #     self.assertEqual(201, response.status_code)
-    #
-    #     data = json.loads(response.data.decode('utf-8'))
-    #     assert_payload_field_type_value(self, data, 'success', bool, True)
-
-    def test_happypath_missing_image(self):
+    def test_happypath_create_report(self):
         payload = deepcopy(self.payload)
-        del payload['image']
+
         response = self.client.post(
             '/api/v1/reports', json=payload,
             content_type='application/json'
@@ -134,174 +42,266 @@ class CreateReportTest(unittest.TestCase):
         self.assertEqual(201, response.status_code)
 
         data = json.loads(response.data.decode('utf-8'))
-        assert_payload_field_type_value(self, data, 'success', bool, False)
 
-    # def test_sadpath_missing_latitude(self):
+        assert_payload_field_type_value(self, data, 'success', bool, True)
+
+        assert_payload_field_type(self, data, 'id', int)
+        report_id = data['id']
+        assert_payload_field_type_value(
+            self, data, 'name', str, payload['name'].strip()
+        )
+        assert_payload_field_type_value(
+            self, data, 'lat', float, payload['lat']
+        )
+        assert_payload_field_type_value(
+            self, data, 'long', float, payload['long']
+        )
+        assert_payload_field_type_value(
+            self, data, 'description', str, payload['description'].strip()
+        )
+        assert_payload_field_type_value(
+            self, data, 'event_type', str, payload['event_type'].strip()
+        )
+        assert_payload_field_type_value(
+            self, data, 'image', str, payload['image'].strip()
+        )
+        assert_payload_field_type_value(
+            self, data, 'city', str, payload['city'].strip()
+        )
+        assert_payload_field_type_value(
+            self, data, 'state', str, payload['state'].strip()
+        )
+
+        assert_payload_field_type(self, data, 'links', dict)
+        links = data['links']
+        assert_payload_field_type_value(
+            self, links, 'get', str, f'/api/v1/reports/{report_id}'
+        )
+        assert_payload_field_type_value(
+            self, links, 'patch', str, f'/api/v1/reports/{report_id}'
+        )
+        assert_payload_field_type_value(
+            self, links, 'delete', str, f'/api/v1/reports/{report_id}'
+        )
+        assert_payload_field_type_value(
+            self, links, 'index', str, '/api/v1/reports'
+        )
+
+    def test_happypath_blank_name(self):
+        payload = deepcopy(self.payload)
+        payload['name'] = ''
+        response = self.client.post(
+            '/api/v1/reports', json=payload,
+            content_type='application/json'
+        )
+        self.assertEqual(201, response.status_code)
+        data = json.loads(response.data.decode('utf-8'))
+        assert_payload_field_type_value(self, data, 'success', bool, True)
+        assert_payload_field_type_value(self, data, 'name', str, 'Anonymous')
+
+    # def test_happypath_missing_name(self):
     #     payload = deepcopy(self.payload)
-    #     del payload['lat']
+    #     del payload['name']
     #     response = self.client.post(
     #         '/api/v1/reports', json=payload,
     #         content_type='application/json'
     #     )
-    #     self.assertEqual(400, response.status_code)
+    #
+    #     self.assertEqual(201, response.status_code)
     #
     #     data = json.loads(response.data.decode('utf-8'))
     #     assert_payload_field_type_value(self, data, 'success', bool, False)
-    #     assert_payload_field_type_value(self, data, 'error', int, 400)
-    #     assert_payload_field_type_value(
-    #         self, data, 'errors', list,
-    #         ["required 'lat' parameter is missing"]
-    #     )
-    #
-    # def test_sadpath_missing_longitude(self):
+
+    def test_happypath_blank_image(self):
+        payload = deepcopy(self.payload)
+        payload['image'] = ''
+        response = self.client.post(
+            '/api/v1/reports', json=payload,
+            content_type='application/json'
+        )
+        self.assertEqual(201, response.status_code)
+
+        data = json.loads(response.data.decode('utf-8'))
+        assert_payload_field_type_value(self, data, 'success', bool, True)
+
+    # def test_happypath_missing_image(self):
     #     payload = deepcopy(self.payload)
-    #     del payload['long']
+    #     del payload['image']
     #     response = self.client.post(
     #         '/api/v1/reports', json=payload,
     #         content_type='application/json'
     #     )
-    #     # import pdb; pdb.set_trace()
-    #     self.assertEqual(400, response.status_code)
-    #     data = json.loads(response.data.decode('utf-8'))
-    #     assert_payload_field_type_value(self, data, 'success', bool, False)
-    #     assert_payload_field_type_value(self, data, 'error', int, 400)
-    #     assert_payload_field_type_value(
-    #         self, data, 'errors', list,
-    #         ["required 'long' parameter is missing"]
-    #     )
-    #
-    # def test_sadpath_missing_description(self):
-    #     payload = deepcopy(self.payload)
-    #     del payload['description']
-    #     response = self.client.post(
-    #         '/api/v1/reports', json=payload,
-    #         content_type='application/json'
-    #     )
-    #     self.assertEqual(400, response.status_code)
+    #     self.assertEqual(201, response.status_code)
     #
     #     data = json.loads(response.data.decode('utf-8'))
     #     assert_payload_field_type_value(self, data, 'success', bool, False)
-    #     assert_payload_field_type_value(self, data, 'error', int, 400)
-    #     assert_payload_field_type_value(
-    #         self, data, 'errors', list,
-    #         ["required 'description' parameter is missing"]
-    #     )
-    #
-    # def test_sadpath_blank_description(self):
-    #     payload = deepcopy(self.payload)
-    #     payload['description'] = ''
-    #     response = self.client.post(
-    #         '/api/v1/reports', json=payload,
-    #         content_type='application/json'
-    #     )
-    #     self.assertEqual(400, response.status_code)
-    #
-    #     data = json.loads(response.data.decode('utf-8'))
-    #     assert_payload_field_type_value(self, data, 'success', bool, False)
-    #     assert_payload_field_type_value(self, data, 'error', int, 400)
-    #     assert_payload_field_type_value(
-    #         self, data, 'errors', list,
-    #         ["required 'description' parameter is blank"]
-    #     )
-    #
-    # def test_sadpath_missing_event_type(self):
-    #     payload = deepcopy(self.payload)
-    #     del payload['event_type']
-    #     response = self.client.post(
-    #         '/api/v1/reports', json=payload,
-    #         content_type='application/json'
-    #     )
-    #     self.assertEqual(400, response.status_code)
-    #
-    #     data = json.loads(response.data.decode('utf-8'))
-    #     assert_payload_field_type_value(self, data, 'success', bool, False)
-    #     assert_payload_field_type_value(self, data, 'error', int, 400)
-    #     assert_payload_field_type_value(
-    #         self, data, 'errors', list,
-    #         ["required 'event_type' parameter is missing"]
-    #     )
-    #
-    # def test_sadpath_blank_event_type(self):
-    #     payload = deepcopy(self.payload)
-    #     payload['event_type'] = ' '
-    #     response = self.client.post(
-    #         '/api/v1/reports', json=payload,
-    #         content_type='application/json'
-    #     )
-    #     self.assertEqual(400, response.status_code)
-    #
-    #     data = json.loads(response.data.decode('utf-8'))
-    #     assert_payload_field_type_value(self, data, 'success', bool, False)
-    #     assert_payload_field_type_value(self, data, 'error', int, 400)
-    #     assert_payload_field_type_value(
-    #         self, data, 'errors', list,
-    #         ["required 'event_type' parameter is blank"]
-    #     )
-    #
-    # def test_sadpath_blank_city(self):
-    #     payload = deepcopy(self.payload)
-    #     payload['city'] = ' '
-    #     response = self.client.post(
-    #         '/api/v1/reports', json=payload,
-    #         content_type='application/json'
-    #     )
-    #     self.assertEqual(400, response.status_code)
-    #
-    #     data = json.loads(response.data.decode('utf-8'))
-    #     assert_payload_field_type_value(self, data, 'success', bool, False)
-    #     assert_payload_field_type_value(self, data, 'error', int, 400)
-    #     assert_payload_field_type_value(
-    #         self, data, 'errors', list,
-    #         ["required 'city' parameter is blank"]
-    #     )
-    #
-    # def test_sadpath_missing_city(self):
-    #     payload = deepcopy(self.payload)
-    #     del payload['city']
-    #     response = self.client.post(
-    #         '/api/v1/reports', json=payload,
-    #         content_type='application/json'
-    #     )
-    #     self.assertEqual(400, response.status_code)
-    #
-    #     data = json.loads(response.data.decode('utf-8'))
-    #     assert_payload_field_type_value(self, data, 'success', bool, False)
-    #     assert_payload_field_type_value(self, data, 'error', int, 400)
-    #     assert_payload_field_type_value(
-    #         self, data, 'errors', list,
-    #         ["required 'city' parameter is missing"]
-    #     )
-    #
-    # def test_sadpath_blank_state(self):
-    #     payload = deepcopy(self.payload)
-    #     payload['state'] = ' '
-    #     response = self.client.post(
-    #         '/api/v1/reports', json=payload,
-    #         content_type='application/json'
-    #     )
-    #     self.assertEqual(400, response.status_code)
-    #
-    #     data = json.loads(response.data.decode('utf-8'))
-    #     assert_payload_field_type_value(self, data, 'success', bool, False)
-    #     assert_payload_field_type_value(self, data, 'error', int, 400)
-    #     assert_payload_field_type_value(
-    #         self, data, 'errors', list,
-    #         ["required 'state' parameter is blank"]
-    #     )
-    #
-    # def test_sadpath_missing_state(self):
-    #     payload = deepcopy(self.payload)
-    #     del payload['state']
-    #     response = self.client.post(
-    #         '/api/v1/reports', json=payload,
-    #         content_type='application/json'
-    #     )
-    #     self.assertEqual(400, response.status_code)
-    #
-    #     data = json.loads(response.data.decode('utf-8'))
-    #     assert_payload_field_type_value(self, data, 'success', bool, False)
-    #     assert_payload_field_type_value(self, data, 'error', int, 400)
-    #     assert_payload_field_type_value(
-    #         self, data, 'errors', list,
-    #         ["required 'state' parameter is missing"]
-    #     )
+
+    def test_sadpath_missing_latitude(self):
+        payload = deepcopy(self.payload)
+        del payload['lat']
+        response = self.client.post(
+            '/api/v1/reports', json=payload,
+            content_type='application/json'
+        )
+        self.assertEqual(400, response.status_code)
+
+        data = json.loads(response.data.decode('utf-8'))
+        assert_payload_field_type_value(self, data, 'success', bool, False)
+        assert_payload_field_type_value(self, data, 'error', int, 400)
+        assert_payload_field_type_value(
+            self, data, 'errors', list,
+            ["required 'lat' parameter is missing"]
+        )
+
+    def test_sadpath_missing_longitude(self):
+        payload = deepcopy(self.payload)
+        del payload['long']
+        response = self.client.post(
+            '/api/v1/reports', json=payload,
+            content_type='application/json'
+        )
+        # import pdb; pdb.set_trace()
+        self.assertEqual(400, response.status_code)
+        data = json.loads(response.data.decode('utf-8'))
+        assert_payload_field_type_value(self, data, 'success', bool, False)
+        assert_payload_field_type_value(self, data, 'error', int, 400)
+        assert_payload_field_type_value(
+            self, data, 'errors', list,
+            ["required 'long' parameter is missing"]
+        )
+
+    def test_sadpath_missing_description(self):
+        payload = deepcopy(self.payload)
+        del payload['description']
+        response = self.client.post(
+            '/api/v1/reports', json=payload,
+            content_type='application/json'
+        )
+        self.assertEqual(400, response.status_code)
+
+        data = json.loads(response.data.decode('utf-8'))
+        assert_payload_field_type_value(self, data, 'success', bool, False)
+        assert_payload_field_type_value(self, data, 'error', int, 400)
+        assert_payload_field_type_value(
+            self, data, 'errors', list,
+            ["required 'description' parameter is missing"]
+        )
+
+    def test_sadpath_blank_description(self):
+        payload = deepcopy(self.payload)
+        payload['description'] = ''
+        response = self.client.post(
+            '/api/v1/reports', json=payload,
+            content_type='application/json'
+        )
+        self.assertEqual(400, response.status_code)
+
+        data = json.loads(response.data.decode('utf-8'))
+        assert_payload_field_type_value(self, data, 'success', bool, False)
+        assert_payload_field_type_value(self, data, 'error', int, 400)
+        assert_payload_field_type_value(
+            self, data, 'errors', list,
+            ["required 'description' parameter is blank"]
+        )
+
+    def test_sadpath_missing_event_type(self):
+        payload = deepcopy(self.payload)
+        del payload['event_type']
+        response = self.client.post(
+            '/api/v1/reports', json=payload,
+            content_type='application/json'
+        )
+        self.assertEqual(400, response.status_code)
+
+        data = json.loads(response.data.decode('utf-8'))
+        assert_payload_field_type_value(self, data, 'success', bool, False)
+        assert_payload_field_type_value(self, data, 'error', int, 400)
+        assert_payload_field_type_value(
+            self, data, 'errors', list,
+            ["required 'event_type' parameter is missing"]
+        )
+
+    def test_sadpath_blank_event_type(self):
+        payload = deepcopy(self.payload)
+        payload['event_type'] = ' '
+        response = self.client.post(
+            '/api/v1/reports', json=payload,
+            content_type='application/json'
+        )
+        self.assertEqual(400, response.status_code)
+
+        data = json.loads(response.data.decode('utf-8'))
+        assert_payload_field_type_value(self, data, 'success', bool, False)
+        assert_payload_field_type_value(self, data, 'error', int, 400)
+        assert_payload_field_type_value(
+            self, data, 'errors', list,
+            ["required 'event_type' parameter is blank"]
+        )
+
+    def test_sadpath_blank_city(self):
+        payload = deepcopy(self.payload)
+        payload['city'] = ' '
+        response = self.client.post(
+            '/api/v1/reports', json=payload,
+            content_type='application/json'
+        )
+        self.assertEqual(400, response.status_code)
+
+        data = json.loads(response.data.decode('utf-8'))
+        assert_payload_field_type_value(self, data, 'success', bool, False)
+        assert_payload_field_type_value(self, data, 'error', int, 400)
+        assert_payload_field_type_value(
+            self, data, 'errors', list,
+            ["required 'city' parameter is blank"]
+        )
+
+    def test_sadpath_missing_city(self):
+        payload = deepcopy(self.payload)
+        del payload['city']
+        response = self.client.post(
+            '/api/v1/reports', json=payload,
+            content_type='application/json'
+        )
+        self.assertEqual(400, response.status_code)
+
+        data = json.loads(response.data.decode('utf-8'))
+        assert_payload_field_type_value(self, data, 'success', bool, False)
+        assert_payload_field_type_value(self, data, 'error', int, 400)
+        assert_payload_field_type_value(
+            self, data, 'errors', list,
+            ["required 'city' parameter is missing"]
+        )
+
+    def test_sadpath_blank_state(self):
+        payload = deepcopy(self.payload)
+        payload['state'] = ' '
+        response = self.client.post(
+            '/api/v1/reports', json=payload,
+            content_type='application/json'
+        )
+        self.assertEqual(400, response.status_code)
+
+        data = json.loads(response.data.decode('utf-8'))
+        assert_payload_field_type_value(self, data, 'success', bool, False)
+        assert_payload_field_type_value(self, data, 'error', int, 400)
+        assert_payload_field_type_value(
+            self, data, 'errors', list,
+            ["required 'state' parameter is blank"]
+        )
+
+    def test_sadpath_missing_state(self):
+        payload = deepcopy(self.payload)
+        del payload['state']
+        response = self.client.post(
+            '/api/v1/reports', json=payload,
+            content_type='application/json'
+        )
+        self.assertEqual(400, response.status_code)
+
+        data = json.loads(response.data.decode('utf-8'))
+        assert_payload_field_type_value(self, data, 'success', bool, False)
+        assert_payload_field_type_value(self, data, 'error', int, 400)
+        assert_payload_field_type_value(
+            self, data, 'errors', list,
+            ["required 'state' parameter is missing"]
+        )
