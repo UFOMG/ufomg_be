@@ -15,8 +15,8 @@ def upgrade():
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('name', sa.String(length=80), nullable=True),
     sa.Column('description', sa.String(length=250), nullable=False),
-    sa.Column('lat', sa.Float(), nullable=True),
-    sa.Column('long', sa.Float(), nullable=True),
+    sa.Column('lat', sa.Float(), nullable=False),
+    sa.Column('long', sa.Float(), nullable=False),
     sa.Column('event_type', sa.String(length=100), nullable=False),
     sa.Column('image', sa.String(length=100), nullable=True),
     sa.PrimaryKeyConstraint('id')
