@@ -49,23 +49,23 @@ class AppTest(unittest.TestCase):
         try:
             report = Report(name='', lat=3.123123, long=3.345345, description="I am your reptilian overloard!", event_type="encounter", image="pics.com")
             report.insert()
-            import pdb; pdb.set_trace()
+            db.session.query(Report).filter_by(name='anonymous').first()
         except IntegrityError:
             self.assertTrue(False)
         else:
             # we should not end up in here
             self.assertTrue(True)  # pragma: no cover
 
-    def test_report_model_missing_name_will_be_stored_as_anonymous(self):
-        try:
-            report = Report(name=None, lat=3.123123, long=3.345345, description="I am your reptilian overloard!", event_type="encounter", image="pics.com")
-            report.insert()
-            report.query(Report).filter_by(name='anonymous').first()
-        except IntegrityError:
-            self.assertTrue(True)
-        else:
-            # we should not end up in here
-            self.assertTrue(False)  # pragma: no cover
+    # def test_report_model_missing_name_will_be_stored_as_anonymous(self):
+    #     try:
+    #         report = Report(name=None, lat=3.123123, long=3.345345, description="I am your reptilian overloard!", event_type="encounter", image="pics.com")
+    #         report.insert()
+    #         db.session.query(Report).filter_by(name='anonymous').first()
+    #     except IntegrityError:
+    #         self.assertTrue(True)
+    #     else:
+    #         # we should not end up in here
+    #         self.assertTrue(False)  # pragma: no cover
 
     # def test_report_model_missing_latitude(self):
     #     try:
