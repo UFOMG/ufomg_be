@@ -13,6 +13,7 @@ manager = Manager(app)
 manager.add_command('db', MigrateCommand)
 
 
+
 @manager.command
 def routes():
     print(app.url_map)
