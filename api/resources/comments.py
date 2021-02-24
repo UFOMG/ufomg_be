@@ -37,7 +37,6 @@ class CommentsResource(Resource):
                 text=data['text'],
                 report_id=data['report_id']
             )
-            import pdb; pdb.set_trace()
             db.session.add(comment)
             db.session.commit()
             return comment, errors
