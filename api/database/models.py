@@ -1,5 +1,6 @@
 import bleach
-from sqlalchemy import Column, String, Integer, Float
+from sqlalchemy import Column, String, Integer, Float, ForeignKey
+from sqlalchemy.orm import relationship
 from api import db
 
 
@@ -10,6 +11,7 @@ class Report(db.Model):
     __tablename__ = 'reports'
 
     # Auto-incrementing, unique primary key
+# Auto-incrementing, unique primary key
     id = Column(Integer, primary_key=True)
     # name
     name = Column(String(80), nullable=True)
@@ -27,12 +29,17 @@ class Report(db.Model):
     city = Column(String(100), unique=False, nullable=False)
     # state
     state = Column(String(100), unique=False, nullable=False)
+    # one to many relationship with comments here
+    comments = relationship('Comment', backref='report', cascade='all, delete-orphan')
 
-    def __init__(self, name, lat, long, description, event_type, city, state, image, report_id=None):
+    def __init__(self, name, lat, long, description, event_type, image, city, state, report_id=None):
         if name is not None:
             name = bleach.clean(name).strip()
             if name == '':
                 name = 'Anonymous'
+
+        if image == '':
+          image = None
 
         self.name = name
         self.lat = lat
@@ -44,6 +51,37 @@ class Report(db.Model):
         self.image = image
         if report_id is not None:
             self.id = report_id
+
+    def insert(self):
+        db.session.add(self)
+        db.session.commit()
+
+    def update(self):
+        db.session.commit()
+
+    def delete(self):
+        db.session.delete(self)
+        db.session.commit()
+
+class Comment(db.Model):
+    """
+    Comment Model
+    """
+    __tablename__= 'comments'
+
+    id = Column(Integer, primary_key=True)
+    text = Column(String, primary_key=True, nullable=False)
+    report_id = Column(Integer, ForeignKey('reports.id'))
+
+    def __init__(self, text, report_id, comment_id=None):
+
+        if text == '':
+          text = None
+
+        self.text = text
+        # self.report =
+        if comment_id is not None:
+            self.id = comment_id
 
     def insert(self):
         db.session.add(self)
