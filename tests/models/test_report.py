@@ -19,15 +19,15 @@ class AppTest(unittest.TestCase):
         self.app_context.pop()
 
     def test_report_model(self):
-        report = Report(name='Mark Zuckerberg', lat=3.123123, long=3.345345, city='Roswell', state='NM',
+        report = Report(name='Mark Zuckerberg', lat=3.123, long=3.345, city='Roswell', state='NM',
                         description="I am your reptilian overloard!", event_type="encounter", image="pics.com")
         report.insert()
 
         self.assertIsInstance(report, Report)
         self.assertIsNotNone(report.id)
         self.assertEqual('Mark Zuckerberg', report.name)
-        self.assertEqual(3.123123, report.lat)
-        self.assertEqual(3.345345, report.long)
+        self.assertEqual(3.123, report.lat)
+        self.assertEqual(3.345, report.long)
         self.assertEqual("I am your reptilian overloard!", report.description)
         self.assertEqual("encounter", report.event_type)
         self.assertEqual("pics.com", report.image)
