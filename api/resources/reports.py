@@ -7,6 +7,12 @@ from sqlalchemy.orm.exc import NoResultFound
 from api import db
 from api.database.models import Report
 
+def _render_comments(comment_obj):
+    comment_list = []
+    for comment in comment_obj:
+        comment_list.append(comment.text)
+    return comment_list
+
 def _validate_field(data, field, proceed, errors, missing_okay=False):
     if field in data:
         if type(data[field]) is str:
@@ -28,6 +34,7 @@ def _report_payload(report):
         'event_type': report.event_type,
         'description': report.description,
         'image': report.image,
+        'comments': _render_comments(report.comments),
         'city': report.city,
         'state': report.state,
         'links': {
@@ -46,13 +53,13 @@ class ReportsResource(Resource):
             data, 'event_type', proceed, errors)
         proceed, report_description, errors = _validate_field(
             data, 'description', proceed, errors)
-        proceed, report_description, errors = _validate_field(
+        proceed, report_lat, errors = _validate_field(
             data, 'lat', proceed, errors)
-        proceed, report_description, errors = _validate_field(
+        proceed, report_long, errors = _validate_field(
             data, 'long', proceed, errors)
-        proceed, report_description, errors = _validate_field(
+        proceed, report_city, errors = _validate_field(
             data, 'city', proceed, errors)
-        proceed, report_description, errors = _validate_field(
+        proceed, report_state, errors = _validate_field(
             data, 'state', proceed, errors)
 
         if proceed:
