@@ -53,6 +53,7 @@ class Report(db.Model):
             self.id = report_id
 
     def insert(self):
+        # import pdb; pdb.set_trace()
         db.session.add(self)
         db.session.commit()
 
@@ -70,16 +71,15 @@ class Comment(db.Model):
     __tablename__= 'comments'
 
     id = Column(Integer, primary_key=True)
-    text = Column(String, primary_key=True, nullable=False)
+    text = Column(String, nullable=False)
     report_id = Column(Integer, ForeignKey('reports.id'))
 
     def __init__(self, text, report_id, comment_id=None):
 
         if text == '':
           text = None
-
         self.text = text
-        # self.report =
+        self.report_id = report_id
         if comment_id is not None:
             self.id = comment_id
 
