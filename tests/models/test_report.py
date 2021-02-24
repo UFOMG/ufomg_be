@@ -33,7 +33,7 @@ class AppTest(unittest.TestCase):
         self.assertEqual("pics.com", report.image)
 
     def test_report_model_with_forced_id(self):
-        report = Report(name='Mark Zuckerberg', lat=3.123123, long=3.345345, city='Roswell', state='NM',
+        report = Report(name='Mark Zuckerberg', lat=3.123, long=3.345, city='Roswell', state='NM',
                         description="I am your reptilian overloard!", event_type="encounter", image="pics.com", report_id=1)
         report.insert()
 
@@ -49,7 +49,7 @@ class AppTest(unittest.TestCase):
 
     def test_report_model_blank_name_will_be_stored_as_anonymous(self):
         try:
-            report = Report(name='', lat=3.123123, long=3.345345, city='Roswell', state='NM',
+            report = Report(name='', lat=3.123, long=3.345, city='Roswell', state='NM',
                             description="I am your reptilian overloard!", event_type="encounter", image="pics.com")
             report.insert()
             db.session.query(Report).filter_by(name='anonymous').first()
@@ -61,7 +61,7 @@ class AppTest(unittest.TestCase):
 
     # def test_report_model_missing_name_will_be_stored_as_anonymous(self):
     #     try:
-    #         report = Report(name=None, lat=3.123123, long=3.345345, description="I am your reptilian overloard!", event_type="encounter", image="pics.com")
+    #         report = Report(name=None, lat=3.123, long=3.345, description="I am your reptilian overloard!", event_type="encounter", image="pics.com")
     #         report.insert()
     #         db.session.query(Report).filter_by(name='anonymous').first()
     #     except IntegrityError:
@@ -72,7 +72,7 @@ class AppTest(unittest.TestCase):
 
     # def test_report_model_missing_latitude(self):
     #     try:
-    #         report = Report(name='Mark Zuckerberg', lat=None, long=3.345345, description="I am your reptilian overloard!", event_type="encounter", image="pics.com")
+    #         report = Report(name='Mark Zuckerberg', lat=None, long=3.345, description="I am your reptilian overloard!", event_type="encounter", image="pics.com")
     #         report.insert()
     #     except IntegrityError:
     #         self.assertTrue(True)
@@ -82,7 +82,7 @@ class AppTest(unittest.TestCase):
 
     # def test_report_model_missing_longitude(self):
     #     try:
-    #         report = Report(name='Mark Zuckerberg', lat=3.123123, long=None, description="I am your reptilian overloard!", event_type="encounter", image="pics.com")
+    #         report = Report(name='Mark Zuckerberg', lat=3.123, long=None, description="I am your reptilian overloard!", event_type="encounter", image="pics.com")
     #         report.insert()
     #     except IntegrityError:
     #         self.assertTrue(True)
@@ -92,7 +92,7 @@ class AppTest(unittest.TestCase):
 
     # def test_report_model_blank_description(self):
     #     try:
-    #         report = Report(name='', lat=3.123123, long=3.345345, description="", event_type="encounter", image="pics.com")
+    #         report = Report(name='', lat=3.123, long=3.345, description="", event_type="encounter", image="pics.com")
     #         report.insert()
     #     except IntegrityError:
     #         self.assertTrue(False)
@@ -102,7 +102,7 @@ class AppTest(unittest.TestCase):
 
     def test_report_model_missing_description(self):
         try:
-            report = Report(name=None, lat=3.123123, long=3.345345,
+            report = Report(name=None, lat=3.123, long=3.345,
                             description=None, event_type="encounter", image="pics.com")
             report.insert()
         except IntegrityError:
@@ -113,7 +113,7 @@ class AppTest(unittest.TestCase):
 
     # def test_report_model_blank_event_type(self):
     #     try:
-    #         report = Report(name='', lat=3.123123, long=3.345345, description="I am your reptilian overloard!", event_type="", image="pics.com")
+    #         report = Report(name='', lat=3.123, long=3.345, description="I am your reptilian overloard!", event_type="", image="pics.com")
     #         report.insert()
     #         session.query(report).filter(name='anonymous').one()
     #     except IntegrityError:
@@ -124,7 +124,7 @@ class AppTest(unittest.TestCase):
 
     def test_report_model_missing_description(self):
         try:
-            report = Report(name=None, lat=3.123123, long=3.345345, city='Roswell', state='NM',
+            report = Report(name=None, lat=3.123, long=3.345, city='Roswell', state='NM',
                             description="I am your reptilian overloard!", event_type=None, image="pics.com")
             report.insert()
         except IntegrityError:
