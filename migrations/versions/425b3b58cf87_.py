@@ -1,7 +1,7 @@
 """empty message
 
 Revision ID: 425b3b58cf87
-Revises: 
+Revises:
 Create Date: 2021-02-24 10:25:58.718720
 
 """
@@ -35,7 +35,7 @@ def upgrade():
     sa.Column('text', sa.String(), nullable=False),
     sa.Column('report_id', sa.Integer(), nullable=True),
     sa.ForeignKeyConstraint(['report_id'], ['reports.id'], ),
-    sa.PrimaryKeyConstraint('id', 'text')
+    sa.PrimaryKeyConstraint('id')
     )
     # ### end Alembic commands ###
 
