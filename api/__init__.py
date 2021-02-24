@@ -79,8 +79,10 @@ def create_app(config_name='default'):
         }), 404
 
     from api.resources.reports import ReportsResource, ReportResource
+    from api.resources.comments import CommentsResource
 
     api.add_resource(ReportResource, '/api/v1/reports/<report_id>')
     api.add_resource(ReportsResource, '/api/v1/reports')
+    api.add_resource(CommentsResource, '/api/v1/comments')
 
     return app
