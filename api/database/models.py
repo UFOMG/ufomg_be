@@ -73,7 +73,7 @@ class Comment(db.Model):
     __tablename__= 'comments'
 
     id = Column(Integer, primary_key=True)
-    text = Column(String, primary_key=True, nullable=False)
+    text = Column(String, nullable=False)
     report_id = Column(Integer, ForeignKey('reports.id'))
     created_at = Column(db.DateTime, nullable=False, default=datetime.utcnow)
 
@@ -83,7 +83,7 @@ class Comment(db.Model):
           text = None
 
         self.text = text
-        # self.report =
+        self.report_id = report_id
         if comment_id is not None:
             self.id = comment_id
 
