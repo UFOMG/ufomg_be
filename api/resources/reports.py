@@ -36,6 +36,7 @@ def _reports_payload(report):
         'image': report.image,
         'city': report.city,
         'state': report.state,
+        'created_at': report.created_at,
         'links': {
             'get': f'/api/v1/reports/{report.id}',
             'delete': f'/api/v1/reports/{report.id}',
@@ -54,6 +55,7 @@ def _report_payload(report):
         'city': report.city,
         'state': report.state,
         'comments': _render_comments(report.comments),
+        'created_at': report.created_at,
         'links': {
             'get': f'/api/v1/reports/{report.id}',
             'delete': f'/api/v1/reports/{report.id}',
