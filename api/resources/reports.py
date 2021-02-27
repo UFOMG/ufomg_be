@@ -112,9 +112,9 @@ class ReportsResource(Resource):
             }, 400
     def get(self, *args, **kwargs):
         reports = Report.query.order_by(
-            Report.name.asc()
+            Report.created_at.asc()
         ).all()
-        results = [_report_payload(report) for report in reports]
+        results = [_reports_payload(report) for report in reports]
         return {
             'success': True,
             'results': results
