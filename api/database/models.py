@@ -2,7 +2,7 @@ import bleach
 from sqlalchemy import Column, String, Integer, Float, ForeignKey
 from sqlalchemy.orm import relationship
 from api import db
-
+from datetime import datetime
 
 class Report(db.Model):
     """
@@ -29,6 +29,8 @@ class Report(db.Model):
     city = Column(String(100), unique=False, nullable=False)
     # state
     state = Column(String(100), unique=False, nullable=False)
+    # created at
+    created_at = Column(db.DateTime, nullable=False, default=datetime.utcnow)
     # one to many relationship with comments here
     comments = relationship('Comment', backref='report', cascade='all, delete-orphan')
 
@@ -73,6 +75,7 @@ class Comment(db.Model):
     id = Column(Integer, primary_key=True)
     text = Column(String, nullable=False)
     report_id = Column(Integer, ForeignKey('reports.id'))
+    created_at = Column(db.DateTime, nullable=False, default=datetime.utcnow)
 
     def __init__(self, text, report_id, comment_id=None):
 
