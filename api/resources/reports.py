@@ -114,7 +114,7 @@ class ReportsResource(Resource):
         reports = Report.query.order_by(
             Report.name.asc()
         ).all()
-        results = [_report_payload(report) for report in reports]
+        results = [_reports_payload(report) for report in reports]
         return {
             'success': True,
             'results': results
