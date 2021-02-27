@@ -23,7 +23,7 @@ def _comment_payload(comment):
     return {
         'text': comment.text,
         'report_id': comment.report_id,
-        'created_at': comment.created_at
+        'created_at': comment.created_at.strftime("%m/%d/%Y, %H:%M:%S")
     }
 class CommentsResource(Resource):
     def _create_comment(self, data):
