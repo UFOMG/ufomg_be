@@ -1,4 +1,5 @@
 import bleach
+from datetime import datetime
 from sqlalchemy import Column, String, Integer, Float, ForeignKey
 from sqlalchemy.orm import relationship
 from api import db
@@ -51,7 +52,6 @@ class Report(db.Model):
         self.city = city
         self.state = state
         self.image = image
-        self.created_at = created_at
         if report_id is not None:
             self.id = report_id
 
@@ -75,6 +75,7 @@ class Comment(db.Model):
     id = Column(Integer, primary_key=True)
     text = Column(String, primary_key=True, nullable=False)
     report_id = Column(Integer, ForeignKey('reports.id'))
+    created_at = Column(db.DateTime, nullable=False, default=datetime.utcnow)
 
     def __init__(self, text, report_id, comment_id=None):
 
