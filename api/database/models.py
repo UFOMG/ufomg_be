@@ -29,6 +29,8 @@ class Report(db.Model):
     city = Column(String(100), unique=False, nullable=False)
     # state
     state = Column(String(100), unique=False, nullable=False)
+    # created_at timestamp
+    created_at = Column(db.DateTime, nullable=False, default=datetime.utcnow)
     # one to many relationship with comments here
     comments = relationship('Comment', backref='report', cascade='all, delete-orphan')
 
@@ -49,6 +51,7 @@ class Report(db.Model):
         self.city = city
         self.state = state
         self.image = image
+        self.created_at = created_at
         if report_id is not None:
             self.id = report_id
 
