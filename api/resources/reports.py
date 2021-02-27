@@ -25,6 +25,23 @@ def _validate_field(data, field, proceed, errors, missing_okay=False):
         errors.append(f"required '{field}' parameter is missing")
         data[field] = ''
     return proceed, data[field], errors
+def _reports_payload(report):
+    return {
+        'id': report.id,
+        'name': report.name,
+        'lat': report.lat,
+        'long': report.long,
+        'event_type': report.event_type,
+        'description': report.description,
+        'image': report.image,
+        'city': report.city,
+        'state': report.state,
+        'links': {
+            'get': f'/api/v1/reports/{report.id}',
+            'delete': f'/api/v1/reports/{report.id}',
+            'index': '/api/v1/reports'
+        }
+    }
 def _report_payload(report):
     return {
         'id': report.id,
@@ -34,14 +51,13 @@ def _report_payload(report):
         'event_type': report.event_type,
         'description': report.description,
         'image': report.image,
-        'comments': _render_comments(report.comments),
         'city': report.city,
         'state': report.state,
+        'comments': _render_comments(report.comments),
         'links': {
             'get': f'/api/v1/reports/{report.id}',
             'delete': f'/api/v1/reports/{report.id}',
-            'index': '/api/v1/reports',
-            'patch': f'/api/v1/reports/{report.id}'
+            'index': '/api/v1/reports'
         }
     }
 class ReportsResource(Resource):
@@ -94,7 +110,7 @@ class ReportsResource(Resource):
         reports = Report.query.order_by(
             Report.name.asc()
         ).all()
-        results = [_report_payload(report) for report in reports]
+        results = [_reports_payload(report) for report in reports]
         return {
             'success': True,
             'results': results
