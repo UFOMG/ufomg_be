@@ -37,6 +37,26 @@ def _report_payload(report):
         'comments': _render_comments(report.comments),
         'city': report.city,
         'state': report.state,
+        'created_at': report.created_at.strftime("%m/%d/%Y, %H:%M:%S"),
+        'links': {
+            'get': f'/api/v1/reports/{report.id}',
+            'delete': f'/api/v1/reports/{report.id}',
+            'index': '/api/v1/reports',
+            'patch': f'/api/v1/reports/{report.id}'
+        }
+    }
+def _reports_payload(report):
+    return {
+        'id': report.id,
+        'name': report.name,
+        'lat': report.lat,
+        'long': report.long,
+        'event_type': report.event_type,
+        'description': report.description,
+        'image': report.image,
+        'city': report.city,
+        'state': report.state,
+        'created_at': report.created_at.strftime("%m/%d/%Y, %H:%M:%S"),
         'links': {
             'get': f'/api/v1/reports/{report.id}',
             'delete': f'/api/v1/reports/{report.id}',
