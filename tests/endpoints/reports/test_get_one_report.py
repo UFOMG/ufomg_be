@@ -3,7 +3,7 @@ import unittest
 from unittest.mock import patch
 
 from api import create_app, db
-from api.database.models import Report
+from api.database.models import Report, Comment
 from tests import db_drop_everything, assert_payload_field_type_value, \
     assert_payload_field_type
 
@@ -16,9 +16,12 @@ class GetReportTest(unittest.TestCase):
         db.create_all()
         self.client = self.app.test_client()
 
-        self.report_1 = Report(name='Mark Zuckerberg', lat=3.123, long=3.345345, city='Roswell', state='NM',
-                               description="I am your reptilian overloard!", event_type="encounter", image="pics.com")
-        self.report_1.insert()
+        self.report_1 = Report(name='Mark Zuckerberg', lat=3.123, long=3.345, city='Roswell', state='NM',
+                        description="I am your reptilian overloard!", event_type="encounter", image="pics.com")
+        self.comment_1 = Comment(text="Then where's your ship?", report_id={self.report_1.id})
+        self.report_1.comments.append(self.comment_1)
+        db.session.add(self.report_1)
+        db.session.commit()
 
     def tearDown(self):
         db.session.remove()
@@ -51,6 +54,12 @@ class GetReportTest(unittest.TestCase):
         )
         assert_payload_field_type_value(
             self, data, 'image', str, self.report_1.image
+        )
+
+        assert_payload_field_type(self, data, 'comments', list)
+        comments = data['comments']
+        assert_payload_field_type_value(
+            self, data, 'comments', list, [self.comment_1.text]
         )
 
         report_id = data['id']
