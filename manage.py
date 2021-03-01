@@ -4,7 +4,7 @@ from flask_migrate import Migrate, MigrateCommand
 from api import create_app, db
 from api.database.models import Report, Comment
 from tests import db_drop_everything
-
+from datetime import datetime
 app = create_app()
 migrate = Migrate(app, db)
 manager = Manager(app)
@@ -25,7 +25,7 @@ def db_seed():
     db.create_all()
 
     # seed anything here we might need
-    report1 = Report(name='Phil', lat=39.3912345, long=-104.5212345, description='Saw some stuff', event_type='sighting', city="Denver", state="CO", image='https://s.hdnux.com/photos/01/00/16/14/16835374/9/1200x0.jpg')
+    report1 = Report(name='Phil', lat=39.3912345, long=-104.5212345, description='Saw some stuff', event_type='sighting', city="Denver", state="CO", image='https://s.hdnux.com/photos/01/00/16/14/16835374/9/1200x0.jpg', created_at=datetime(2021, 2, 22,13,00).strftime("%m/%d/%Y, %H:%M:%S"))
     report2 = Report(name='Phil', lat=39.4312345, long=-104.5012345, description='Saw some stuff', event_type='sighting', city="Denver", state="CO", image='https://s.hdnux.com/photos/01/00/16/14/16835374/9/1200x0.jpg')
     report3 = Report(name='Phil', lat=39.4112345, long=-104.5612345, description='Saw some stuff', event_type='sighting', city="Denver", state="CO", image='https://s.hdnux.com/photos/01/00/16/14/16835374/9/1200x0.jpg')
     report4 = Report(name='Phil', lat=39.4512345, long=-104.5212345, description='Saw some stuff', event_type='sighting', city="Denver", state="CO", image='https://s.hdnux.com/photos/01/00/16/14/16835374/9/1200x0.jpg')
