@@ -75,7 +75,7 @@ class Comment(db.Model):
 
     id = Column(Integer, primary_key=True)
     text = Column(String, nullable=False)
-    report_id = Column(Integer, ForeignKey('reports.id'))
+    report_id = Column(Integer, ForeignKey('reports.id'), nullable=False)
     created_at = Column(db.DateTime, nullable=False, default=datetime.utcnow)
 
     def __init__(self, text, report_id, comment_id=None):
