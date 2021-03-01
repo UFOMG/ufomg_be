@@ -25,6 +25,7 @@ def _validate_field(data, field, proceed, errors, missing_okay=False):
         errors.append(f"required '{field}' parameter is missing")
         data[field] = ''
     return proceed, data[field], errors
+
 def _report_payload(report):
     return {
         'id': report.id,
@@ -45,6 +46,7 @@ def _report_payload(report):
             'patch': f'/api/v1/reports/{report.id}'
         }
     }
+
 def _reports_payload(report):
     return {
         'id': report.id,
@@ -98,6 +100,7 @@ class ReportsResource(Resource):
             return report, errors
         else:
             return None, errors
+
     def post(self, *args, **kwargs):
         report, errors = self._create_report(json.loads(request.data))
         if report is not None:
@@ -110,6 +113,7 @@ class ReportsResource(Resource):
                 'error': 400,
                 'errors': errors
             }, 400
+
     def get(self, *args, **kwargs):
         reports = Report.query.order_by(
             Report.name.asc()
@@ -119,6 +123,7 @@ class ReportsResource(Resource):
             'success': True,
             'results': results
         }, 200
+
 class ReportResource(Resource):
     def get(self, *args, **kwargs):
         report_id = int(bleach.clean(kwargs['report_id'].strip()))
@@ -130,6 +135,7 @@ class ReportResource(Resource):
         report_payload = _report_payload(report)
         report_payload['success'] = True
         return report_payload, 200
+        
     def delete(self, *args, **kwargs):
         report_id = kwargs['report_id']
         report = None
