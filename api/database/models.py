@@ -35,7 +35,7 @@ class Report(db.Model):
     # one to many relationship with comments here
     comments = relationship('Comment', backref='report', cascade='all, delete-orphan')
 
-    def __init__(self, name, lat, long, description, event_type, image, city, state, report_id=None):
+    def __init__(self, name, lat, long, description, event_type, image, city, state, report_id=None, created_at=None):
         if name is not None:
             name = bleach.clean(name).strip()
             if name == '':
@@ -43,7 +43,8 @@ class Report(db.Model):
 
         if image == '':
           image = None
-
+        if created_at is not None:
+            self.created_at = created_at
         self.name = name
         self.lat = lat
         self.long = long
