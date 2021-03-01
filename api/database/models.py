@@ -35,11 +35,14 @@ class Report(db.Model):
     # one to many relationship with comments here
     comments = relationship('Comment', backref='report', cascade='all, delete-orphan')
 
-    def __init__(self, name, lat, long, description, event_type, image, city, state, report_id=None):
+    def __init__(self, name, lat, long, description, event_type, image, city, state, report_id=None, created_at=None):
         if name is not None:
             name = bleach.clean(name).strip()
             if name == '':
                 name = 'Anonymous'
+
+        if created_at is not None:
+            self.created_at = created_at        
 
         if image == '':
           image = None
