@@ -44,19 +44,19 @@ class AppTest(unittest.TestCase):
         self.assertEqual(1, comment.id)
         self.assertEqual('I knew it!', comment.text)
 
-    # def test_report_model_missing_text(self):
-    #     try:
-    #         report = Report(name='Mark Zuckerberg', lat=3.123, long=3.345, city='Roswell', state='NM',
-    #                         description="I am your reptilian overloard!", event_type="encounter", image="pics.com")
-    #         comment = Comment(report_id={report.id})
-    #         report.comments.append(comment)
-    #         db.session.add(report)
-    #         db.session.commit()
-    #     except IntegrityError:
-    #         self.assertTrue(True)
-    #     else:
-    #         # we should not end up in here
-    #         self.assertTrue(False)  # pragma: no cover
+    def test_report_model_missing_text(self):
+        try:
+            report = Report(name='Mark Zuckerberg', lat=3.123, long=3.345, city='Roswell', state='NM',
+                            description="I am your reptilian overloard!", event_type="encounter", image="pics.com")
+            comment = Comment(text=None, report_id={report.id})
+            report.comments.append(comment)
+            db.session.add(report)
+            db.session.commit()
+        except IntegrityError:
+            self.assertTrue(True)
+        else:
+            # we should not end up in here
+            self.assertTrue(False)  # pragma: no cover
 
     def test_report_model_blank_text(self):
         try:
@@ -72,30 +72,17 @@ class AppTest(unittest.TestCase):
             # we should not end up in here
             self.assertTrue(False)  # pragma: no cover
 
-    # def test_report_model_missing_report_id(self):
-    #     try:
-    #         report = Report(name='Mark Zuckerberg', lat=3.123, long=3.345, city='Roswell', state='NM',
-    #                         description="I am your reptilian overloard!", event_type="encounter", image="pics.com")
-    #         comment = Comment(text='I knew it!', report_id='')
-    #         report.comments.append(comment)
-    #         db.session.add(report)
-    #         db.session.commit()
-    #     except IntegrityError:
-    #         self.assertTrue(True)
-    #     else:
-    #         # we should not end up in here
-    #         self.assertTrue(False)  # pragma: no cover
-
-    # def test_report_model_blank_report_id(self):
-    #     try:
-    #         report = Report(name='Mark Zuckerberg', lat=3.123, long=3.345, city='Roswell', state='NM',
-    #                         description="I am your reptilian overloard!", event_type="encounter", image="pics.com")
-    #         comment = Comment(text='I knew it!', report_id=None)
-    #         report.comments.append(comment)
-    #         db.session.add(report)
-    #         db.session.commit()
-    #     except IntegrityError:
-    #         self.assertTrue(True)
-    #     else:
-    #         # we should not end up in here
-    #         self.assertTrue(False)  # pragma: no cover
+    def test_report_model_blank_report_id(self):
+        try:
+            report = Report(name='Mark Zuckerberg', lat=3.123, long=3.345, city='Roswell', state='NM',
+                            description="I am your reptilian overloard!", event_type="encounter", image="pics.com")
+            comment = Comment(text='I knew it!', report_id=None)
+            # report.comments.append(comment)
+            db.session.add(report)
+            db.session.add(comment)
+            db.session.commit()
+        except IntegrityError:
+            self.assertTrue(True)
+        else:
+            # we should not end up in here
+            self.assertTrue(False)  # pragma: no cover

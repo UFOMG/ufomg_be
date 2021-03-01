@@ -71,17 +71,6 @@ class AppTest(unittest.TestCase):
             # we should not end up in here
             self.assertTrue(True)  # pragma: no cover
 
-    # def test_report_model_blank_lat(self):
-    #     try:
-    #         report = Report(name='Mark Zuckerberg', lat='', long=3.345, city='Roswell', state='NM',
-    #                         description="I am your reptilian overloard!", event_type="encounter", image="pics.com")
-    #         report.insert()
-    #     except IntegrityError:
-    #         self.assertTrue(True)
-    #     else:
-    #         # we should not end up in here
-    #         self.assertTrue(False)  # pragma: no cover
-
     def test_report_model_missing_lat(self):
         try:
             report = Report(name='Mark Zuckerberg', lat=None, long=3.345, city='Roswell', state='NM',
@@ -92,17 +81,6 @@ class AppTest(unittest.TestCase):
         else:
             # we should not end up in here
             self.assertTrue(False)  # pragma: no cover
-
-    # def test_report_model_blank_long(self):
-    #     try:
-    #         report = Report(name='Mark Zuckerberg', lat=3.123, long='', city='Roswell', state='NM',
-    #                         description="I am your reptilian overloard!", event_type="encounter", image="pics.com")
-    #         report.insert()
-    #     except IntegrityError:
-    #         self.assertTrue(True)
-    #     else:
-    #         # we should not end up in here
-    #         self.assertTrue(False)  # pragma: no cover
 
     def test_report_model_missing_long(self):
         try:
@@ -121,21 +99,21 @@ class AppTest(unittest.TestCase):
                             description="I am your reptilian overloard!", event_type="encounter", image="pics.com")
             report.insert()
         except IntegrityError:
-            self.assertTrue(False)
+            self.assertTrue(True)
         else:
             # we should not end up in here
-            self.assertTrue(True)  # pragma: no cover
+            self.assertTrue(False)  # pragma: no cover
 
-    # def test_report_model_missing_city(self):
-    #     try:
-    #         report = Report(name='Mark Zuckerberg', lat=3.123, long=3.345, city=None, state='NM',
-    #                         description="I am your reptilian overloard!", event_type="encounter", image="pics.com")
-    #         report.insert()
-    #     except IntegrityError:
-    #         self.assertTrue(False)
-    #     else:
-    #         # we should not end up in here
-    #         self.assertTrue(True)  # pragma: no cover
+    def test_report_model_missing_city(self):
+        try:
+            report = Report(name='Mark Zuckerberg', lat=3.123, long=3.345, city=None, state='NM',
+                            description="I am your reptilian overloard!", event_type="encounter", image="pics.com")
+            report.insert()
+        except IntegrityError:
+            self.assertTrue(True)
+        else:
+            # we should not end up in here
+            self.assertTrue(False)  # pragma: no cover
 
     def test_report_model_blank_state(self):
         try:
@@ -143,32 +121,32 @@ class AppTest(unittest.TestCase):
                             description="I am your reptilian overloard!", event_type="encounter", image="pics.com")
             report.insert()
         except IntegrityError:
-            self.assertTrue(False)
+            self.assertTrue(True)
         else:
             # we should not end up in here
-            self.assertTrue(True)  # pragma: no cover
+            self.assertTrue(False)  # pragma: no cover
 
-    # def test_report_model_missing_state(self):
-    #     try:
-    #         report = Report(name='Mark Zuckerberg', lat=3.123, long=3.345, city='Roswell', state=None,
-    #                         description="I am your reptilian overloard!", event_type="encounter", image="pics.com")
-    #         report.insert()
-    #     except IntegrityError:
-    #         self.assertTrue(False)
-    #     else:
-    #         # we should not end up in here
-    #         self.assertTrue(True)  # pragma: no cover
+    def test_report_model_missing_state(self):
+        try:
+            report = Report(name='Mark Zuckerberg', lat=3.123, long=3.345, city='Roswell', state=None,
+                            description="I am your reptilian overloard!", event_type="encounter", image="pics.com")
+            report.insert()
+        except IntegrityError:
+            self.assertTrue(True)
+        else:
+            # we should not end up in here
+            self.assertTrue(False)  # pragma: no cover
 
-    # def test_report_model_blank_description(self):
-    #     try:
-    #         report = Report(name='Mark Zuckerberg', lat=3.123, long=3.345, city='Roswell', state='NM',
-    #                         description='', event_type="encounter", image="pics.com")
-    #         report.insert()
-    #     except IntegrityError:
-    #         self.assertTrue(True)
-    #     else:
-    #         # we should not end up in here
-    #         self.assertTrue(False)  # pragma: no cover
+    def test_report_model_blank_description(self):
+        try:
+            report = Report(name='Mark Zuckerberg', lat=3.123, long=3.345, city='Roswell', state='NM',
+                            description='', event_type="encounter", image="pics.com")
+            report.insert()
+        except IntegrityError:
+            self.assertTrue(True)
+        else:
+            # we should not end up in here
+            self.assertTrue(False)  # pragma: no cover
 
     def test_report_model_missing_description(self):
         try:
@@ -181,16 +159,16 @@ class AppTest(unittest.TestCase):
             # we should not end up in here
             self.assertTrue(False)  # pragma: no cover
 
-    # def test_report_model_blank_event_type(self):
-    #     try:
-    #         report = Report(name='Mark Zuckerberg', lat=3.123, long=3.345, city='Roswell', state='NM',
-    #                         description='I am your reptilian overloard!', event_type='', image="pics.com")
-    #         report.insert()
-    #     except IntegrityError:
-    #         self.assertTrue(True)
-    #     else:
-    #         # we should not end up in here
-    #         self.assertTrue(False)  # pragma: no cover
+    def test_report_model_blank_event_type(self):
+        try:
+            report = Report(name='Mark Zuckerberg', lat=3.123, long=3.345, city='Roswell', state='NM',
+                            description='I am your reptilian overloard!', event_type='', image="pics.com")
+            report.insert()
+        except IntegrityError:
+            self.assertTrue(True)
+        else:
+            # we should not end up in here
+            self.assertTrue(False)  # pragma: no cover
 
     def test_report_model_missing_event_type(self):
         try:
