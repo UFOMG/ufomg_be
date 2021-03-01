@@ -19,6 +19,7 @@ def _validate_field(data, field, proceed, errors, missing_okay=False):
         errors.append(f"required '{field}' parameter is missing")
         data[field] = ''
     return proceed, data[field], errors
+
 def _comment_payload(comment):
     return {
         'text': comment.text,
@@ -43,6 +44,7 @@ class CommentsResource(Resource):
             return comment, errors
         else:
             return None, errors
+
     def post(self, *args, **kwargs):
         comment, errors = self._create_comment(json.loads(request.data))
         if comment is not None:
