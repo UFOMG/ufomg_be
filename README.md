@@ -11,6 +11,7 @@
 
 ## Table of Contents
   - [What it does](#what-it-does)
+  - [What it does](#contributors)
   - [Virtual Environment Setup](#virtual-environment-setup)
   - [Database Setup](#database-setup)
   - [API Contract](#api-contract)
@@ -29,6 +30,13 @@ This repository is part of a service-oriented architecture application that allo
 To view the production site, please visit the [UFOMG link](in_progress).
 
 To view the other components of the application please visit the [Github Project Organization](https://github.com/UFOMG).
+
+## Contributors
+
+Hanna Davis  Github[https://github.com/Oxalisviolacea] | Linkedin[https://www.linkedin.com/in/hanna-davis/]
+Todd Estes  Github[https://github.com/Todd-Estes] | Linkedin[https://www.linkedin.com/in/toddwestes/]
+Philip DeFraties  Github[https://github.com/philipdefraties] | Linkedin[https://www.linkedin.com/in/philip-defraties/]
+Austin Aspaas  Github[https://gist.github.com/evilaspaas1] | Linkedin[https://www.linkedin.com/in/austin-aspaas-4626611bb/]
 
 ## Virtual Environment Setup
 
