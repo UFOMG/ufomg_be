@@ -1,3 +1,14 @@
+# README
+<!-- Shields -->
+![](https://img.shields.io/badge/Python-v3.9-blue)
+![](https://img.shields.io/badge/Framework-Flask-yellow)
+![](https://img.shields.io/badge/DB-PostgreSQL-blue)
+![](https://img.shields.io/travis/com/UFOMG/ufomg_be)
+![](https://img.shields.io/github/contributors/UFOMG/ufomg_be)
+![](https://img.shields.io/badge/UFOMG-BE-green)
+![](https://img.shields.io/github/issues/UFOMG/ufomg_be)
+# UFOMG_BE
+
 ## Table of Contents
   - [What it does](#what-it-does)
   - [Virtual Environment Setup](#virtual-environment-setup)
@@ -60,6 +71,27 @@ python3 manage.py db upgrade
 
 ```
 ## API Contract
+
+To see an example response like that below you can use [Postman](https://www.postman.com/) to send a GET request to our BE hosted on Heroku here: https://ancient-mesa-60922.herokuapp.com/api/v1/reports
+
+![Screen Shot 2021-03-01 at 2 28 33 PM](https://user-images.githubusercontent.com/66448493/109561749-d7435b00-7a9a-11eb-8dc7-418175c5b755.png)
+
+
+Required parameters:
+
+GET /api/v1/users
+Description:
+
+fetches all users in the database
+returns 200 status code on success
+Required Request Headers:
+
+none
+Required Request Body:
+
+none
+Response Body: (TBD)
+
 
 ## Dependencies
 ```
