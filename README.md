@@ -91,8 +91,8 @@ The request URL will be `http://localhost:5000`
 To send requests to the production API:
 The request URL will be `https://ancient-mesa-60922.herokuapp.com/`
   
-#### Create New Report
-POST /api/v1/reports 
+### Create New Report
+POST /api/v1/reports  
 Required Request Body:
 ```
 {
@@ -129,9 +129,9 @@ Response Body:
     "success": true
 }
 ```
-
-#### Create New Comment
-POST /api/v1/reports 
+  
+### Create New Comment
+POST /api/v1/reports   
 Required Request Body:
 ```
 {
@@ -149,10 +149,10 @@ Response Body:
 }
 ```
 
-#### Get All Reports
-GET /api/v1/reports
-Required Request Body:
-none
+### Get All Reports
+GET /api/v1/reports  
+Required Request Body:  
+none  
 Response Body:
 ```
 {
@@ -197,11 +197,11 @@ Response Body:
     ]
 }
 ```
-#### Get One Report by ID
-GET /api/v1/reports/1
-Append the id number at the end of the URI
-Required Request Body:
-none
+### Get One Report by ID
+GET /api/v1/reports/1  
+Append the id number at the end of the URI  
+Required Request Body:  
+none  
 Response Body:
 ```
 {
