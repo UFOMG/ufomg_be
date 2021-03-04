@@ -14,13 +14,10 @@
   - [Contributors](#contributors)
   - [Schema](#schema)
   - [Virtual Environment Setup](#virtual-environment-setup)
-  - [Database Setup](#database-setup)
-  - [API Endpoints](#api-endpoints)
   - [Dependencies](#dependencies)
+  - [Database Setup](#database-setup)
   - [Testing](#testing)
-  - [Learning Goals](#learning-goals)
-  - [Licenses](#licenses)
-  - [Acknowledgments](#acknowledgments)
+  - [API Endpoints](#api-endpoints)
 
 ## What it does
 
@@ -61,6 +58,24 @@ pip3 install -r requirements.txt
 To shut off your virtual environment, run deactivate at a terminal where you have an active virtual environment.
 ```
 
+## Dependencies
+```
+Flask==1.1.2
+Flask-RESTful==0.3.8
+Flask-SQLAlchemy==2.4.4
+psycopg2-binary==2.8.6
+SQLAlchemy==1.3.19
+flask_migrate==2.5.3
+flask-script==2.0.6
+Flask-Cors==3.0.9
+bleach==3.2.1
+pytest==6.1.0
+coverage==5.3
+gunicorn==20.0.4
+pep8==1.7.1
+pycodestyle==2.6.0
+```  
+
 ## Database Setup
 
 ```
@@ -80,6 +95,14 @@ export DATABASE_URL=postgresql://localhost:5432/ufomg_test
 python3 manage.py db upgrade
 
 ```
+
+## Testing
+```
+export DATABASE_URL=postgresql://localhost:5432/ufomg_test
+pytest
+```
+There should be 44 passing tests with 100% test coverage.
+
 ## API Endpoints
 To send requests to your local server:
 ```
@@ -233,28 +256,3 @@ Response Body:
     "report_id":1
 }
 ```
-
-## Dependencies
-```
-Flask==1.1.2
-Flask-RESTful==0.3.8
-Flask-SQLAlchemy==2.4.4
-psycopg2-binary==2.8.6
-SQLAlchemy==1.3.19
-flask_migrate==2.5.3
-flask-script==2.0.6
-Flask-Cors==3.0.9
-bleach==3.2.1
-pytest==6.1.0
-coverage==5.3
-gunicorn==20.0.4
-pep8==1.7.1
-pycodestyle==2.6.0
-```  
-  
-## Testing
-```
-export DATABASE_URL=postgresql://localhost:5432/ufomg_test
-pytest
-```
-There should be 44 passing tests with 100% test coverage.
