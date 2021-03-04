@@ -12,31 +12,32 @@
 ## Table of Contents
   - [What it does](#what-it-does)
   - [Contributors](#contributors)
+  - [Schema](#schema)
   - [Virtual Environment Setup](#virtual-environment-setup)
   - [Database Setup](#database-setup)
-  - [API Contract](#api-contract)
-  - [Schema](#schema)
+  - [API Endpoints](#api-endpoints)
   - [Dependencies](#dependencies)
   - [Testing](#testing)
   - [Learning Goals](#learning-goals)
   - [Licenses](#licenses)
-  - [Contact](#contact)
   - [Acknowledgments](#acknowledgments)
 
 ## What it does
 
 This repository is part of a service-oriented architecture application that allows users to report indivdual experiences with unidentified flying objects and/or extraterrestrial beings. Serving as the backend to the ufomg-fe repository, ufomg_be takes user input and creates unique instances of encounter reports. In the spirit of the project's theme, there is no account registration or account login...users may remain annonymous. Users also have the ability to leave comments on individual sightings.
 
-To view the production site, please visit the [UFOMG link](in_progress).
+To view the front-end production site, please visit the [UFOMG link](http://ufomfg.herokuapp.com/).
 
 To view the other components of the application please visit the [Github Project Organization](https://github.com/UFOMG).
 
 ## Contributors
 
-Hanna Davis  [Github](https://github.com/Oxalisviolacea) | [LinkedIn](https://www.linkedin.com/in/hanna-davis/)
-Todd Estes  [Github](https://github.com/Todd-Estes) | [LinkedIn](https://www.linkedin.com/in/toddwestes/)
-Philip DeFraties  [Github](https://github.com/philipdefraties) | [LinkedIn](https://www.linkedin.com/in/philip-defraties/)
-Austin Aspaas  [Github](https://gist.github.com/evilaspaas1) | [LinkedIn](https://www.linkedin.com/in/austin-aspaas-4626611bb/)
+- Austin Aspaas  [Github](https://gist.github.com/evilaspaas1) | [LinkedIn](https://www.linkedin.com/in/austin-aspaas-4626611bb/)
+- Hanna Davis  [Github](https://github.com/Oxalisviolacea) | [LinkedIn](https://www.linkedin.com/in/hanna-davis/)
+- Philip DeFraties  [Github](https://github.com/philipdefraties) | [LinkedIn](https://www.linkedin.com/in/philip-defraties/)
+- Todd Estes  [Github](https://github.com/Todd-Estes) | [LinkedIn](https://www.linkedin.com/in/toddwestes/)
+
+## Schema
 
 ## Virtual Environment Setup
 
@@ -78,7 +79,7 @@ export DATABASE_URL=postgresql://localhost:5432/ufomg_test
 python3 manage.py db upgrade
 
 ```
-## API Contract
+## API Endpoints
 
 To see an example response like that below you can use [Postman](https://www.postman.com/) to send a GET request to our BE hosted on Heroku here: https://ancient-mesa-60922.herokuapp.com/api/v1/reports
 
@@ -117,4 +118,11 @@ coverage==5.3
 gunicorn==20.0.4
 pep8==1.7.1
 pycodestyle==2.6.0
+```  
+  
+## Testing
 ```
+export DATABASE_URL=postgresql://localhost:5432/ufomg_test
+pytest
+```
+There should be 44 passing tests with 100% test coverage.
