@@ -81,27 +81,158 @@ python3 manage.py db upgrade
 
 ```
 ## API Endpoints
-
-To see an example response like that below you can use [Postman](https://www.postman.com/) to send a GET request to our BE hosted on Heroku here: https://ancient-mesa-60922.herokuapp.com/api/v1/reports
-
-![Screen Shot 2021-03-01 at 2 28 33 PM](https://user-images.githubusercontent.com/66448493/109561749-d7435b00-7a9a-11eb-8dc7-418175c5b755.png)
-
-
-Required parameters:
-
-GET /api/v1/users
-Description:
-
-fetches all users in the database
-returns 200 status code on success
-Required Request Headers:
-
-none
+To send requests to your local server:
+```
+export DATABASE_URL=postgresql://localhost:5432/ufomg_dev
+python3 run.py
+```
+The request URL will be `http://localhost:5000`  
+  
+To send requests to the production API:
+The request URL will be `https://ancient-mesa-60922.herokuapp.com/`
+  
+#### Create New Report
+POST /api/v1/reports 
 Required Request Body:
+```
+{
+    "name": "Alien_Lover",
+    "lat": 34.022003,
+    "long": -84.361549,
+    "description": "I saw a glowing orange saucer!",
+    "event_type": "sighting",
+    "image": "https://www.sacbee.com/latest-news/aygydt/picture240363531/alternates/LANDSCAPE_1140/cloudufo.jpg",
+    "city": "Roswell",
+    "state": "NM"
+}
+```
+Response Body:
+```
+{
+    "id": 1,
+    "name": "Alien_Lover",
+    "lat": 34.022003,
+    "long": -84.36155,
+    "event_type": "sighting",
+    "description": "I saw a glowing orange saucer!",
+    "image": "https://www.sacbee.com/latest-news/aygydt/picture240363531/alternates/LANDSCAPE_1140/cloudufo.jpg",
+    "comments": [],
+    "city": "Roswell",
+    "state": "NM",
+    "created_at": "03/04/2021, 03:56:40",
+    "links": {
+        "get": "/api/v1/reports/1",
+        "delete": "/api/v1/reports/1",
+        "index": "/api/v1/reports",
+        "patch": "/api/v1/reports/1"
+    },
+    "success": true
+}
+```
 
+#### Create New Comment
+POST /api/v1/reports 
+Required Request Body:
+```
+{
+    "text":"That's obviously a cloud...",
+    "report_id":1
+}
+```
+Response Body:
+```
+{
+    "text": "That's obviously a cloud...",
+    "report_id": 1,
+    "created_at": "03/04/2021, 04:40:30",
+    "success": true
+}
+```
+
+#### Get All Reports
+GET /api/v1/reports
+Required Request Body:
 none
-Response Body: (TBD)
-
+Response Body:
+```
+{
+    "success": true,
+    "results": [
+        {
+            "id": 1,
+            "name": "Alien_Lover",
+            "lat": 34.022003,
+            "long": -84.36155,
+            "event_type": "sighting",
+            "description": "I saw a glowing orange saucer!",
+            "image": "https://www.sacbee.com/latest-news/aygydt/picture240363531/alternates/LANDSCAPE_1140/cloudufo.jpg",
+            "city": "Roswell",
+            "state": "NM",
+            "created_at": "03/04/2021, 03:56:40",
+            "links": {
+                "get": "/api/v1/reports/1",
+                "delete": "/api/v1/reports/1",
+                "index": "/api/v1/reports",
+                "patch": "/api/v1/reports/1"
+            }
+        },
+        {
+            "id": 2,
+            "name": "Believer123",
+            "lat": 37.2431,
+            "long": -115.793,
+            "event_type": "encounter",
+            "description": "I found a dead body. Any idea what this could be?",
+            "image": "https://i.insider.com/5ab52763d0965921008b46b8?width=1136&format=jpeg",
+            "city": "Rachel",
+            "state": "NV",
+            "created_at": "03/04/2021, 04:34:35",
+            "links": {
+                "get": "/api/v1/reports/2",
+                "delete": "/api/v1/reports/2",
+                "index": "/api/v1/reports",
+                "patch": "/api/v1/reports/2"
+            }
+        }
+    ]
+}
+```
+#### Get One Report by ID
+GET /api/v1/reports/1
+Append the id number at the end of the URI
+Required Request Body:
+none
+Response Body:
+```
+{
+    "id": 1,
+    "name": "Alien_Lover",
+    "lat": 34.022003,
+    "long": -84.36155,
+    "event_type": "sighting",
+    "description": "I saw a glowing orange saucer!",
+    "image": "https://www.sacbee.com/latest-news/aygydt/picture240363531/alternates/LANDSCAPE_1140/cloudufo.jpg",
+    "comments": [
+        "That's obviously a cloud..."
+    ],
+    "city": "Roswell",
+    "state": "NM",
+    "created_at": "03/04/2021, 03:56:40",
+    "links": {
+        "get": "/api/v1/reports/1",
+        "delete": "/api/v1/reports/1",
+        "index": "/api/v1/reports",
+        "patch": "/api/v1/reports/1"
+    },
+    "success": true
+}
+```
+```
+{
+    "text":"They have my ship at area 51",
+    "report_id":1
+}
+```
 
 ## Dependencies
 ```
