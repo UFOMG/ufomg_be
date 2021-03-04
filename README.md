@@ -38,7 +38,7 @@ To view the other components of the application please visit the [Github Project
 - Todd Estes  [Github](https://github.com/Todd-Estes) | [LinkedIn](https://www.linkedin.com/in/toddwestes/)
 
 ## Schema
-<img src="https://github.com/UFOMG/ufomg_be/blob/main/schema_diagram.png" width="400" height="200" />
+<img src="https://github.com/UFOMG/ufomg_be/blob/main/schema_diagram.png" width="800" height="400" />
   
 ## Virtual Environment Setup
 
